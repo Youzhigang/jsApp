@@ -1,0 +1,48 @@
+.clearfix::after {
+    clear: both;
+    display: block;
+    height: 0;
+    content: ".";
+    visibility: hidden;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 600px;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.container ul {
+    height: 130px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.container ul li {
+    float: left;
+    list-style: none;
+    width: 200px;
+    height: 130px;
+}
+
+img {
+    width: 200px;
+    height: 130px;
+}
+
+#show {
+    width: 600px;
+    height: 390px;
+}
