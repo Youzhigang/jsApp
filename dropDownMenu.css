@@ -1,0 +1,67 @@
+* {
+    padding: 0px;
+}
+
+.box {
+    margin: 100px auto;
+    width: 30%;
+    text-align: center;
+}
+
+li {
+    padding-top: 5px;
+}
+
+.box ul {
+    list-style: none;
+    padding-top: 10px;
+    position: absolute;
+}
+
+ul.one_level>li {
+    width: 80px;
+    float: left;
+}
+
+ul.one_level ul {
+    display: none;
+}
+
+a:hover {
+    background: #ccc;
+}
+
+ul.one_level>li:hover>ul {
+    display: block;
+}
+
+ul.two_level>li:hover>ul {
+    display: block;
+    position: relative;
+    left: 100%;
+}
+
+
+/*.one_level {
+    width: 500px;
+}*/
+
+.two_level {
+    margin-left: 20px;
+}
+
+.three_level {
+    margin-top: -30px;
+}
+
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.clearfix {
+    *zoom: 1;
+}
