@@ -19,3 +19,12 @@ function Controller(t, c, s) {} //分别是 标题,内容(class/id),和点击加
 
 #### 3.dropdownMenu.html  css写的下拉菜单,通过:hover控制display的属性,细节地方值得完善
 
+
+#### 4.toolTip
+纯css导航条,toolTip效果,主要目的是练习stylus,熟悉transition,transform等
+``` npm install stylus -g  ```
+or
+``` yarn global add stylus ```
+
+watch  ```stylus -w style.styl -o  style.css```
+compress  ``` stylus -c app.styl -o test.css ```
