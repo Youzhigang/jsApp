@@ -28,3 +28,7 @@ or
 
 watch  ```stylus -w style.styl -o  style.css```
 compress  ``` stylus -c app.styl -o test.css ```
+
+
+#### 5.放大镜效果
+参考慕课网上写的

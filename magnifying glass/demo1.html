@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .small-box{
+           width: 500px;
+           height: 300px;
+           /*border: 1px solid black;*/
+           position: relative;
+        }
+        .float-box{
+            position: absolute;
+            height: 150px;
+            width: 200px;
+            border: 1px solid red;
+            display: none;
+            filter: alpha(opacity=50);
+            opacity: 0.5;
+            cursor: move;
+            background: #ffffcc;
+        }
+        .big-box{
+            width: 500px;
+            height:300px;
+            border: 1px solid black;
+            /*float: right;*/
+            left:600px;
+            top: 0px;
+            position: absolute;
+            z-index: -1;
+            overflow: hidden;
+            display: none;
+        }
+        .big-box img{
+            position: absolute;
+        }
+       
+        </style>
+    </head>
+    <body>
+    <div class="demo">
+        <div class="small-box">
+            <div class="float-box"></div>
+            <img src="./macbook-small.jpg" alt="">
+        </div>
+        <div class="big-box">
+            <img src="./macbook-big.jpg" alt="">
+        </div>
+    </div>
+
+    </body>
+    <script>
+       window.onload = function(){
+            var objDemo = document.querySelector('.demo'),
+                objSmallBox  = document.querySelector('.small-box'),
+                objFloatBox = document.querySelector('.float-box'),
+                objBigBox = document.querySelector('.big-box'),
+                objBigImg = document.querySelector('.big-box img');
+
+            objSmallBox.addEventListener('mouseover',function(){
+                objFloatBox.style.display = 'block'
+                objBigBox.style.display = 'block'
+            })
+            objSmallBox.addEventListener('mouseout',function(){
+                objFloatBox.style.display = 'none'
+                objBigBox.style.display = 'none'
+            })
+
+            objSmallBox.addEventListener('mousemove', function(e){
+                var x = e.clientX - objSmallBox.offsetLeft - objFloatBox.clientWidth /2
+                var y = e.clientY - objSmallBox.offsetTop - objFloatBox.clientHeight /2
+                
+                /*if(x<0){
+                    x=0
+                }else if(x>objSmallBox.clientWidth -objFloatBox.clientWidth ){
+                    x =  objFloatBox.offsetLeft
+                }
+
+                if(y<0){
+                    y = 0
+                }else if(y>objSmallBox.clientHeight -objFloatBox.clientHeight){
+                    y =  objFloatBox.offsetTop
+                }*/
+                x<0 ? x= 0 : x>objSmallBox.clientWidth -objFloatBox.clientWidth ? x= objFloatBox.offsetLeft: ''
+                y<0 ? y =0 : y>objSmallBox.clientHeight -objFloatBox.clientHeight ? y = objFloatBox.offsetTop :''
+
+                objFloatBox.style.left = x +'px'
+                objFloatBox.style.top = y+ 'px'
+
+                var r = objBigBox.clientWidth / objSmallBox.clientWidth
+                var sx = (objBigImg.clientWidth - objBigBox.clientWidth) / (objSmallBox.clientWidth - objFloatBox.clientWidth) * x
+                var sy = (objBigImg.clientHeight - objBigBox.clientHeight) / (objSmallBox.clientHeight - objFloatBox.clientHeight) * y
+                // console.log(px);
+                objBigImg.style.left = '-'+sx +'px'
+                objBigImg.style.top = '-'+sy +'px'
+            })
+       }
+    </script>
+</html>
