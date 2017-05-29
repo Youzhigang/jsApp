@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .control{
+        /*display: inline-block;*/
+        line-height: 16px;
+        margin-bottom: 10px;
+    }
+    .control label{
+        vertical-align: top;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="control">
+        <input type="checkbox" name="" value="" id="check1" />
+        <label for="check1">test</label>
+    </div>
+        
+    <div class="control">    
+        <input type="radio" name="test" id="radio1" /> <label for="radio1">test1</label>
+        <input type="radio" name="test" id="radio2" /> <label for="radio2">test2</label>
+    </div>
+</body>
+
+<script type='text/javascript'> 
+
+    function BetterCheck (selector) {
+        this.selector = selector
+        this._el = document.querySelector("#" + selector)
+        if (!this._el) {
+            console.error('the selector error')
+        }
+    }
+
+    
+    BetterCheck.prototype.$$init = function () {
+        // console.log(this._el.id)
+        this._el.style.display = 'none'
+        this._addStyle()
+        this._insertLabel()
+    }
+
+    BetterCheck.prototype._insertLabel = function () {
+        let _instead =  document.createElement('label')
+        _instead.setAttribute('for',this._el.id )
+        // _instead.innerHTML = "${this._el.id}"
+        this._el.setAttribute('css_hook', '_bettercheck_')
+        _instead.setAttribute('css_hook', '_bettercheck_')
+        insertAfter(_instead, this._el)
+        
+    }
+
+    BetterCheck.prototype._addStyle = function () {
+        let _style = document.getElementById('_bettercheck_')
+        if (!_style){
+            let _style = document.createElement('style') 
+            _style.setAttribute('id', '_bettercheck_')
+            let _css = "input[type=checkbox][css_hook=_bettercheck_]+label[css_hook=_bettercheck_]" + 
+            "{display:inline-block;width:16px;height:16px;box-sizing:border-box;border:1px solid #d6d6d6;}"
+            _css += "input[type=checkbox][css_hook=_bettercheck_]:checked+label[css_hook=_bettercheck_]" + 
+            "{border:1px solid #d73e33;position:relative}";
+            _css += "input[type=checkbox][css_hook=_bettercheck_]:checked+label[css_hook=_bettercheck_]::before{\
+            content:'';display:block;position:absolute;width:9px;height:4px;top:50%;left:50%;transform:translate(-50%,-50%) rotateZ(-45deg);\
+            border-top:none;border-right:none;border-bottom:2px solid #d73e33;border-left:2px solid #d73e33}";
+            _css += "input[type=radio]+label[css_hook=_bettercheck_][css_hook=_bettercheck_]" + 
+            "{display:inline-block;width:16px;height:16px;box-sizing:border-box;border:1px solid #d6d6d6;border-radius: 50%;}";
+            _css += "input[type=radio]:checked+label[css_hook=_bettercheck_][css_hook=_bettercheck_]" + "{ border: 1px solid #d73e33;position: relative;}";
+            _css += "input[type=radio]:checked+label[css_hook=_bettercheck_][css_hook=_bettercheck_]::before{\
+                content: '';display: block;position: absolute;width: 6px;height: 6px;background: #d73e33;border-radius: 50%;top: 50%;left: 50%;transform: translate(-50%, -50%);}";
+            _style.innerHTML = _css
+            document.head.appendChild(_style)
+        } else {
+            return 
+        }
+    }
+    
+    function insertAfter(newElement, targetElement){  
+        let parent = targetElement.parentNode
+        parent.lastChild === targetElement ?  parent.appendChild(newElement):parent.insertBefore(newElement, targetElement.nextSibling)
+    }  
+    
+    window.onload = function () {
+        new BetterCheck('check1').$$init()
+        new BetterCheck('radio1').$$init()
+        new BetterCheck('radio2').$$init()
+    }
+</script>
+</html>

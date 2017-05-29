@@ -32,3 +32,7 @@ compress  ``` stylus -c app.styl -o test.css ```
 
 #### 5.放大镜效果
 参考慕课网上写的
+
+#### 6.改变checkbox, radio 样式的js插件
+> 伪类的实现方式
+> 更改元素伪类是简单粗暴的插入style标签实现的
